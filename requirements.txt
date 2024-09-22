@@ -1,0 +1,17 @@
+allennlp==2.10.1
+huggingface-hub==0.10.1
+jupyter-server==2.14.2
+jupyterlab==4.2.4
+matplotlib==3.9.1
+nltk==3.8.1
+numpy==1.26.4
+pandas==2.2.2
+pytest==8.3.2
+scikit-learn==1.5.1
+scipy==1.14.0
+spacy==3.3.3
+tqdm==4.66.4
+torch==1.12.0
+torchtext==0.13.0
+torchvision==0.13.0
+transformers==4.20.1
