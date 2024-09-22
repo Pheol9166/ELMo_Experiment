@@ -1,0 +1,33 @@
+{
+  "MODEL":{
+    "EMBEDDING_DIM":300,
+    "GLOVE_NAME": "42B",
+    "GLOVE_DIM":300,
+    "HIDDEN_DIM":512,
+    "OUTPUT_DIM":4,
+    "LEARNING_RATE":0.01,
+    "EMBEDDING_DROPOUT": 0.3,
+    "NUM_HIDDEN_LAYERS":2,
+    "LSTM_DROPOUT": 0.1,
+    "GLOVE_FREEZE": true
+  },
+  "TRAIN":{
+    "MODEL_PATH": "./data/raw_data"
+    "BATCH_SIZE":16,
+    "EPOCHS":10,
+    "ELMO_MODE":true,
+    "SCHEDULER":{
+      "MODE": "min",
+      "FACTOR": 0.1,
+      "PATIENCE": 3,
+      "VERBOSE": true
+    }
+  },
+  "ES":{
+    "MODEL_PATH":"checkpoints/nn",
+    "GLOVE_MODEL_PATH": "checkpoints/glove",
+    "PATIENCE":3,
+    "VERBOSE":true,
+    "DELTA":0
+  }
+}

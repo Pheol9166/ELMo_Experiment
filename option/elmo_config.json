@@ -1,0 +1,6 @@
+{
+  "OPTION": "https://allennlp.s3.amazonaws.com/models/elmo/2x4096_512_2048cnn_2xhighway/elmo_2x4096_512_2048cnn_2xhighway_options.json",
+  "WEIGHTS": "https://allennlp.s3.amazonaws.com/models/elmo/2x4096_512_2048cnn_2xhighway/elmo_2x4096_512_2048cnn_2xhighway_weights.hdf5",
+  "NUM_OUT_REP": 1,
+  "DROPOUT": 0
+}
