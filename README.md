@@ -2,6 +2,8 @@
 
 ![image](https://github.com/user-attachments/assets/b217549d-dacb-48ce-af4c-f7a70f636790)
 
+**Model Performance Comparison Experiment using ELMo**
+
 ## 목차
 - [서론](#서론)
 - [실험 설계](#실험-설계)
@@ -107,6 +109,7 @@ ELMo의 bi-LSTM은 Forward LM과 Backward LM으로 이루어진다.  다만, 기
 
 ## 실험 결과
 ![image](https://github.com/user-attachments/assets/98973c86-65de-431c-8c06-f0a794603890)
+
 전체적인 결과를 살펴보자면, Base 모델을 사용했을 때보다 ELMo와 함께 결합했을 때가 Accuracy, F1-Score 두 평가지표 모두에서 높은 성능을 보였다. 다만 nn.Embedding의 경우 Accuracy가 0.73%p 증가하였고, GloVe의 경우 1.1%p 증가한 것으로 보아 큰 성능 변화는 없는 것으로 보인다. F1-Score에서도 마찬가지로 증가 폭이 크지 않은 것으로 보아 ELMo 결합에 따른 성능 향상은 존재하나, 둘 다 의미있는 정도의 향상은 아니라 볼 수 있다. nn.Embedding, GloVe를 비교한 결과, GloVe와 결합했을 때가 성능 향상이 더 높게 나왔는데 이는 nn.Embedding이 손실함수에 따라 가중치를 업데이트하는 과정에서 문맥이 고려되었기에 ELMo로 인한 성능 향상이 크게 일어나지 않은 걸로 생각한다.
 
 
