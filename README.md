@@ -105,7 +105,21 @@ ELMo의 bi-LSTM은 Forward LM과 Backward LM으로 이루어진다.  다만, 기
 
 모델은 실험에서 다루는 경우들 모두 LSTM layer는 공통되기 때문에 Embedding Layer, LSTM Layer를 나누어 각각 구현하였다. Embedding Layer에는 elmo_mode라는 boolean argument를 추가하여 그 값에 따라 ELMo와 기존의 임베딩이 결합된다. 더불어 Embedding Layer와 LSTM layer를 연결하는 Classifier 클래스를 만들어 임베딩 결과가  LSTM layer로 이어지고, 카테고리를 분류한다.
 
-학습은 Trainer 클래스를 통해 데이터셋, 모델, 옵티마이저, 손실 함수, learning rate 등을 입력받아 이루어진다. 손실 함수로는 다중 분류에 적합한 Cross Entropy 함수를 사용하였고, 옵티마이저에는 Adam을 사용하였다. 또한, ReduceLROnPlateau를 ****scheduler로 설정하여 성능 향상이 없을 때 learning rate를 감소하게 했다.
+학습은 Trainer 클래스를 통해 데이터셋, 모델, 옵티마이저, 손실 함수, learning rate 등을 입력받아 이루어진다. 손실 함수로는 다중 분류에 적합한 Cross Entropy 함수를 사용하였고, 옵티마이저에는 Adam을 사용하였다. 또한, ReduceLROnPlateau를 scheduler로 설정하여 성능 향상이 없을 때 learning rate를 감소하게 했다.
+
+실험에 사용한 hyperparameter는 다음과 같다.
+| Hyperparam | Value |
+|------|---|
+|batch_size|16|
+|epoch|10|
+| embedding_dim |300|
+|hidden_dim|512|
+|output_dim|4|
+|learning_rate|0.01|
+|num_layers|2|
+
+
+
 
 ## 실험 결과
 ![image](https://github.com/user-attachments/assets/98973c86-65de-431c-8c06-f0a794603890)
