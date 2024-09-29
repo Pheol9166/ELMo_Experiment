@@ -77,7 +77,7 @@ ELMo의 bi-LSTM은 Forward LM과 Backward LM으로 이루어진다.  다만, 기
 
 이처럼 ELMo는 사전 학습된 모델을 통해 문맥 정보를 반영하였다는 점에서 강한 성능을 보일 수 있다.  이에 본 연구에서는 간단한 성능 비교 실험을 통해 ELMo가 어느 정도의 성능 향상을 보이는지 확인해보기로 하였다.
 
-# 실험 설계
+## 실험 설계
 실험은 ELMo를 통해 생성된 elmo representaton이 기존 임베딩 기법과 결합하였을 때의 성능 향상을 측정하는 것이 목적이다. 
 기존 임베딩 기법만 사용했을 때의 평가 척도, 엘모와 결합하여 사용했을 때의 평가 척도를 비교하는 방식으로 실험을 진행하였다. 한 가지 기법만으로 실험을 진행하게 된다면 일반적인 향상의 결과라 보장할 수 없기에, 다음 두 가지의 임베딩 기법들을 비교하며 확인해보기로 하였다.  
 
@@ -101,11 +101,19 @@ ELMo의 bi-LSTM은 Forward LM과 Backward LM으로 이루어진다.  다만, 기
 
 실험을 위한 task는 다중 텍스트 분류로 선정하였다. 텍스트를 여러 분류로 구분하기 위해선 텍스트 내 사용된 단어의 문맥적 의미가 중요하게 적용할 것이다. 데이터는 AG News Classification Dataset을 사용했으며, Description 열은 데이터 처리가 일괄적으로 되지 않아 Title 열을 사용하였다.  정리하자면, 입력받은 Title 데이터를 World, Sports, Business, Sci/Tech 중 하나의 주제로 구분하는 것이 실험의 task이다.
 
-구현에 있어서는 pytorch를 사용하였다. 먼저 데이터셋은 AG News Classification의 Title 데이터와 word encoder, elmo_mode를 초기화 파라미터로 받는다. word encoder는 텍스트 데이터를 입력받아 토큰화와 패딩, 인코딩을 진행하는 클래스이다.  elmo_mode에 따라 word encoder에서 처리한 단어 토큰들을 데이터셋에 반환값에 포함한다.
+### 학습
+- 학습 데이터셋
+  
+    데이터셋은 약 120,000개의 뉴스 분류 데이터가 있는 AG News Classification을 사용하였다. 그중에서도 Title 데이터를 활용하여 학습을 진행하였고, 각각 모델에 맞는 Encoder 클래스에 따라 인코딩되었다.
 
-모델은 실험에서 다루는 경우들 모두 LSTM layer는 공통되기 때문에 Embedding Layer, LSTM Layer를 나누어 각각 구현하였다. Embedding Layer에는 elmo_mode라는 boolean argument를 추가하여 그 값에 따라 ELMo와 기존의 임베딩이 결합된다. 더불어 Embedding Layer와 LSTM layer를 연결하는 Classifier 클래스를 만들어 임베딩 결과가  LSTM layer로 이어지고, 카테고리를 분류한다.
+- 모델 설계
 
-학습은 Trainer 클래스를 통해 데이터셋, 모델, 옵티마이저, 손실 함수, learning rate 등을 입력받아 이루어진다. 손실 함수로는 다중 분류에 적합한 Cross Entropy 함수를 사용하였고, 옵티마이저에는 Adam을 사용하였다. 또한, ReduceLROnPlateau를 scheduler로 설정하여 성능 향상이 없을 때 learning rate를 감소하게 했다.
+    모델은 실험에서 다루는 경우들 모두 LSTM layer는 공통되기 때문에 Embedding Layer, LSTM Layer를 나누어 각각 구현하였다. Embedding Layer에는 elmo_mode라는 boolean argument를 추가하여 그 값에 따라 ELMo와 기존의 임베딩이 결합된다. 더불어 Embedding Layer와 LSTM layer를 연결하는 Classifier 클래스를 만들어 임베딩 결과가  LSTM layer로 이어지고, 카테고리를 분류한다.
+
+- 학습 설계
+
+    학습은 Trainer 클래스를 통해 데이터셋, 모델, 옵티마이저, 손실 함수, learning rate 등을 입력받아 이루어진다. 손실 함수로는 다중 분류에 적합한 Cross Entropy 함수를 사용하였고, 옵티마이저에는 Adam을 사용하였다. 또한, ReduceLROnPlateau를 scheduler로 설정하여 성능 향상이 없을 때 learning rate를 감소하게 했다.
+
 
 실험에 사용한 hyperparameter는 다음과 같다.
 | Hyperparam | Value |
